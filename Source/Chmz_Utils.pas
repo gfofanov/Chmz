@@ -2,9 +2,9 @@ unit Chmz_Utils;
 
 interface
 
-uses Variants, MSAccess, MemData, SysUtils, Forms;
+uses Variants, MSAccess, SysUtils, Forms;
 
-function GetResultSql(Session : TMSConnection; const Sql : String ) : Variant;
+function GetResultSql(Session : TMSConnection; const Sql : string) : Variant;
 // ¬ыполн€ет SQL запрос, возвращает поле с именем 'Result'
 
 implementation
@@ -24,7 +24,7 @@ begin
      Result:=tmpQuery.FieldByName('Result').AsVariant;
   finally
    FreeAndNil(tmpQuery);
-  end
+  end;
 end;
 
 end.

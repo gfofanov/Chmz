@@ -8,8 +8,8 @@ uses
 
 type
   Tdm = class(TDataModule)
-    msCon1: TMSConnection;
-    imgChmz: TImageList;
+    msCon1: TMSConnection; // Коннект к MS SQL серверу
+    imgChmz: TImageList;   // Картинки к кнопкам
   private
     { Private declarations }
   public
@@ -17,9 +17,9 @@ type
   end;
 
 const
-  RegistryKey = '\software\app_Chmz_otd2';
-  myDBServer  = 'DBSERVER';
-  myDatabase  = 'iac54o2sk';
+  RegistryKey = '\software\app_Chmz_otd2'; // Ветка реестра с параметрами
+  myDBServer  = 'DBSERVER'; // Имя сервера БД по умолчанию
+  myDatabase  = 'iac54o2sk'; // Имя базы данных по умолчанию
 
 var
   dm: Tdm;
