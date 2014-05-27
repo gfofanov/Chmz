@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, DB, DBAccess, MSAccess, DBGridEhGrouping, MemDS, GridsEh,
   DBGridEh, DASQLMonitor, MSSQLMonitor, ToolWin, ComCtrls, ActnList, TeeProcs,
   TeEngine, Chart, DBChart, Series, StdCtrls, Buttons, Mask, sMaskEdit,
-  sCustomComboEdit, sTooledit, sEdit, sSpinEdit;
+  sCustomComboEdit, sTooledit, sEdit, sSpinEdit, TeePyramid;
 
 type
   TfrmMain = class(TForm)
@@ -29,7 +29,6 @@ type
     dbchtGraph: TDBChart;
     qrGraph: TMSStoredProc;
     pnlToolGraph: TPanel;
-    arsrsSeries1: TAreaSeries;
     lnsrsSeries1: TLineSeries;
     rb1: TRadioButton;
     btnApplyGraph: TBitBtn;
@@ -60,6 +59,7 @@ type
     procedure stmpckr1Exit(Sender: TObject);
     procedure btnApplyTableClick(Sender: TObject);
     procedure tmrRefreshTimer(Sender: TObject);
+    procedure dbchtGraphBeforeDrawChart(Sender: TObject);
   private
     { Private declarations }
     procedure ReopenTable(isCurDate: Boolean = True);
@@ -120,6 +120,26 @@ begin
     end;
 end;
 
+procedure TfrmMain.dbchtGraphBeforeDrawChart(Sender: TObject);
+  var
+    i : Word;
+begin
+  // Цвет точек графика
+  dbchtGraph.Series[0].ColorEachPoint:=True; // Каждая точка имеет свой цвет
+  dsGraph.DataSet.First;
+  for i := 0 to dbchtGraph.Series[0].Count-1 do
+    begin
+      case dsGraph.DataSet.FieldByName('Color').AsInteger of
+        0: dbchtGraph.Series[0].ValueColor[i]:=clGray;
+        1: dbchtGraph.Series[0].ValueColor[i]:=$8072FA; //clFuchsia; //clRed;
+        2: dbchtGraph.Series[0].ValueColor[i]:=clYellow;
+        3: dbchtGraph.Series[0].ValueColor[i]:=clLime; //clGreen;
+      end;
+      if not dsGraph.DataSet.Eof then
+        dsGraph.DataSet.MoveBy(1);
+    end;
+end;
+
 procedure TfrmMain.dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
   AFont: TFont; var Background: TColor; State: TGridDrawState);
 begin
@@ -127,9 +147,9 @@ begin
   if dsTable.DataSet.Active and not dsTable.DataSet.IsEmpty then
     case dsTable.DataSet.FieldByName('Color').AsInteger of
       0: BackGround:=clGray;
-      1: BackGround:=clRed;
+      1: BackGround:=$8072FA; //clFuchsia; //clRed;
       2: BackGround:=clYellow;
-      3: BackGround:=clGreen;
+      3: BackGround:=clLime; //clGreen;
     end;
 end;
 

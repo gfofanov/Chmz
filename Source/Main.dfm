@@ -55,7 +55,7 @@ object frmMain: TfrmMain
       FooterFont.Style = []
       IndicatorOptions = [gioShowRowIndicatorEh]
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghDblClickOptimizeColWidth, dghColumnResize, dghColumnMove]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghRowHighlight, dghDblClickOptimizeColWidth, dghColumnResize, dghColumnMove]
       RowDetailPanel.Color = clBtnFace
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -118,6 +118,7 @@ object frmMain: TfrmMain
       Top = 0
       Width = 1184
       Height = 29
+      ButtonHeight = 24
       Caption = 'tlb1'
       Images = dm.imgChmz
       TabOrder = 1
@@ -145,7 +146,7 @@ object frmMain: TfrmMain
         Left = 39
         Top = 0
         Width = 99
-        Height = 22
+        Height = 24
         Alignment = taCenter
         Caption = #1044#1072#1085#1085#1099#1077' '#1085#1072' '#1076#1072#1090#1091':'
       end
@@ -153,7 +154,7 @@ object frmMain: TfrmMain
         Left = 138
         Top = 0
         Width = 94
-        Height = 22
+        Height = 24
         AutoSize = False
         EditMask = '!99/99/9999;1; '
         MaxLength = 10
@@ -187,7 +188,7 @@ object frmMain: TfrmMain
         Left = 240
         Top = 0
         Width = 121
-        Height = 22
+        Height = 24
         TabOrder = 1
         Text = '00:00:00'
         OnEnter = stmpckr1Enter
@@ -214,7 +215,7 @@ object frmMain: TfrmMain
         Left = 369
         Top = 0
         Width = 75
-        Height = 22
+        Height = 24
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
         TabOrder = 3
         OnClick = btnApplyTableClick
@@ -231,7 +232,7 @@ object frmMain: TfrmMain
         Left = 452
         Top = 0
         Width = 193
-        Height = 22
+        Height = 24
         Caption = #1054#1073#1085#1086#1074#1083#1103#1090#1100' '#1088#1072#1079' '#1074' '#1084#1080#1085#1091#1090#1091
         TabOrder = 2
         OnClick = chk1Click
@@ -263,37 +264,53 @@ object frmMain: TfrmMain
       Top = 35
       Width = 1184
       Height = 402
+      BackWall.Brush.Image.Data = {
+        07544269746D617036030000424D360300000000000036000000280000001000
+        0000100000000100180000000000000300000000000000000000000000000000
+        000067B8DE63B6DC63B6DC60B3D963B5DC65B7DE61B4DF5CB1DE56AAD759AAD2
+        5BACD659ADD858ADD85AADDA61B4DC66B7DD6ABBE06AB9DE65B4DD5EB0DB59AB
+        D653A3D454A7D855AADB57ABD65AAAD058A6D152A4D052A6D754A9D95BAEDA60
+        B2DA69BBDD6CBBDD6BBBDD60B2DA5AAAD851A3D654A9D956AADA5AACD55EAED3
+        5EAED35DAED35BADD659ABD95BAEDB62B5DD5EAFDA5EB0D85EB1DA5DB0DA5EB0
+        DA5AADD958ABDA57ABDB56ABD95CADD55AAAD05BABD35DADD55EAFD85EAFDA5B
+        AED957ABD855ABD958ADD958AED956ACD854AAD84EA5D84DA4D94CA3D650A4D1
+        55A9D259ABD654A8D653A7D757ABDA58ADDA58B1D959B0D962B5DB60B3DB60B5
+        DC60B5DC5FB3DD5EB3DC58AFD95FB1D761B3D65BB0D458B1D863B7DC69BADD65
+        B9DD6ABBDE68BADD6CBCDE6BBBDC6CBCDD6DBCDF6CBEDE68BDDE62B6DB6AB8DA
+        6AB9DA65B7D965B7DB5FB3DA66B8DD69BBDF73C1E36EBEDF70BFDF73C0E173C2
+        E273C1E36DBFE16DBEE26FBFDF71BCDC75BDDB76BFDE6FC0DD75C1E078C1E178
+        C4E162B6DB60B3DA5AACD75AAED75AAED75DADD65BAAD456A9D85DB2DD61B4DE
+        63B6DE63B4DC61B3DB62B6DA63B6DC67B8DC61B3DC58ADDA55ABD752A6D350A3
+        D057A5D15CABD15AABD754A9DB52A6D851A2D458AAD75EB0DA65B5DB68B8DE6C
+        BADF61B5DD5BAFDA5AACD95BADD55BAED45FAFD35DADD55BACD753AAD855A9D8
+        50A3D559A9D860B2DA6BBADE6ABBDC6ABADF5CAEDB5DAFDA5DAFD95CAED35AAC
+        D359AAD35BADD656ACD955ABD957ACDB58ABD85DB1DA5EB0DA60B1DA5DB0DA5C
+        AEDA5AAEDA57ADDA54A9D755A9D657ACD555A9D350A5D24CA4D64DA6D84FA6D9
+        57ABD857ACD859AEDA59ADD854ABD855ABDA66B9DE68B8DD64B5DB5AAFD95DB0
+        D562B2D760B2D758AED85BB3DA5DB3D95FB5DD61B4DB61B3DA61B5DB57AFD958
+        B0DA68BBDE66B8DC5FB3D867B6DB65B5D96CB9D86AB8D761B6DC6BBADF6FBEDF
+        6EBDDE6BBBDF6BBADE6CBBDE67B9DD69BBDD7AC2E078C2DE76C1E16FBDDE73BF
+        DE73BEDC70BCDB70BFE06EBFE16EBFDF73C2DF78C2DF75C0DF71C0E070BFDE74
+        C2DF}
+      Title.Font.Gradient.EndColor = 753908
+      Title.Font.Gradient.MidColor = 16059031
+      Title.Font.Gradient.StartColor = 14540754
       Title.Text.Strings = (
         #1043#1088#1072#1092#1080#1082' '#1080#1079#1084#1077#1088#1077#1085#1080#1081)
+      Chart3DPercent = 5
       View3D = False
+      Zoom.Pen.Color = clBlack
+      Zoom.Pen.Width = 2
+      OnBeforeDrawChart = dbchtGraphBeforeDrawChart
       Align = alClient
       TabOrder = 0
       PrintMargins = (
         15
-        36
+        33
         15
-        36)
-      object arsrsSeries1: TAreaSeries
-        Active = False
-        Marks.Arrow.Visible = True
-        Marks.Callout.Brush.Color = clBlack
-        Marks.Callout.Arrow.Visible = True
-        Marks.Visible = False
-        DataSource = qrGraph
-        ShowInLegend = False
-        DrawArea = True
-        Pointer.InflateMargins = True
-        Pointer.Style = psRectangle
-        Pointer.Visible = False
-        XValues.DateTime = True
-        XValues.Name = 'X'
-        XValues.Order = loAscending
-        XValues.ValueSource = 'MeasDT'
-        YValues.Name = 'Y'
-        YValues.Order = loNone
-        YValues.ValueSource = 'Value'
-      end
+        33)
       object lnsrsSeries1: TLineSeries
+        ColorEachPoint = True
         Depth = 0
         Marks.Arrow.Visible = True
         Marks.Callout.Brush.Color = clBlack
@@ -303,14 +320,15 @@ object frmMain: TfrmMain
         DataSource = qrGraph
         SeriesColor = clRed
         ShowInLegend = False
+        ClickableLine = False
         LinePen.Width = 3
         LinePen.SmallSpace = 1
-        Pointer.HorizSize = 2
+        Pointer.HorizSize = 12
         Pointer.InflateMargins = True
         Pointer.Pen.Visible = False
         Pointer.Style = psCircle
-        Pointer.VertSize = 2
-        Pointer.Visible = False
+        Pointer.VertSize = 7
+        Pointer.Visible = True
         XValues.DateTime = True
         XValues.Name = 'X'
         XValues.Order = loAscending
@@ -367,6 +385,7 @@ object frmMain: TfrmMain
     SQL.Strings = (
       '{:RETURN_VALUE = CALL getLastListByDate (:LastDate)}')
     Options.TrimVarChar = True
+    Active = True
     Left = 224
     Top = 72
     ParamData = <
@@ -423,6 +442,7 @@ object frmMain: TfrmMain
         '{:RETURN_VALUE = CALL getParamByPeriod (:FacilityCode, :FirstDat' +
         'e, :LastDate)}')
     Options.TrimVarChar = True
+    Active = True
     Left = 352
     Top = 316
     ParamData = <
