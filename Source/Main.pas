@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, DB, DBAccess, MSAccess, DBGridEhGrouping, MemDS, GridsEh,
   DBGridEh, DASQLMonitor, MSSQLMonitor, ToolWin, ComCtrls, ActnList, TeeProcs,
   TeEngine, Chart, DBChart, Series, StdCtrls, Buttons, Mask, sMaskEdit,
-  sCustomComboEdit, sTooledit, sEdit, sSpinEdit, TeePyramid;
+  sCustomComboEdit, sTooledit, sEdit, sSpinEdit;
 
 type
   TfrmMain = class(TForm)
@@ -32,7 +32,6 @@ type
     lnsrsSeries1: TLineSeries;
     rb1: TRadioButton;
     btnApplyGraph: TBitBtn;
-    medtHour: TMaskEdit;
     dedt1: TsDateEdit;
     btn3: TToolButton;
     lbl1: TLabel;
@@ -43,6 +42,8 @@ type
     btnApplyTable: TBitBtn;
     btn6: TToolButton;
     tmrRefresh: TTimer;
+    hrzbrsrsSeries1: THorizBarSeries;
+    edtHour: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
@@ -60,8 +61,11 @@ type
     procedure btnApplyTableClick(Sender: TObject);
     procedure tmrRefreshTimer(Sender: TObject);
     procedure dbchtGraphBeforeDrawChart(Sender: TObject);
+    procedure edtHourChange(Sender: TObject);
   private
     { Private declarations }
+    lCurDate: TDateTime; // Дата для выборки данных
+    lPrevHour : Integer; // Кол-во предыдущих часов для графика
     procedure ReopenTable(isCurDate: Boolean = True);
     procedure ReopenGraph;
   public
@@ -71,7 +75,6 @@ type
 var
   frmMain: TfrmMain;
   myMonitor: TMSSQLMonitor;
-  lCurDate: TDateTime;
 
 implementation
 
@@ -136,14 +139,14 @@ begin
         3: dbchtGraph.Series[0].ValueColor[i]:=clLime; //clGreen;
       end;
       if not dsGraph.DataSet.Eof then
-        dsGraph.DataSet.MoveBy(1);
+        dsGraph.DataSet.Next;
     end;
 end;
 
 procedure TfrmMain.dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
   AFont: TFont; var Background: TColor; State: TGridDrawState);
 begin
-  // Изменить цвет фона ячеек в зависимости от данных
+  // Изменить цвет фона ячеек грида в зависимости от данных
   if dsTable.DataSet.Active and not dsTable.DataSet.IsEmpty then
     case dsTable.DataSet.FieldByName('Color').AsInteger of
       0: BackGround:=clGray;
@@ -167,6 +170,19 @@ procedure TfrmMain.dsTableDataChange(Sender: TObject; Field: TField);
 begin
   if not (dsTable.DataSet.State in [dsBrowse]) then exit;
   ReopenGraph;
+end;
+
+procedure TfrmMain.edtHourChange(Sender: TObject);
+// Проверка ввода кол-ва часов
+begin
+  if Trim(edtHour.Text)='' then
+    Exit;
+  // Если ввели не цифру, исправить на 24
+  try
+   lPrevHour:=StrToInt(trim(edtHour.Text));
+  except on E:EConvertError do
+   edtHour.Text:='24';
+  end;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -212,7 +228,17 @@ begin
     begin
       // Параметры для графика
       TMSStoredProc(dsGraph.DataSet).ParamByName('FacilityCode').AsString:=dsTable.DataSet.FieldByName('FacilityCode').AsString;
-      TMSStoredProc(dsGraph.DataSet).ParamByName('FirstDate').AsDateTime:=IncMinute(IncHour(dsTable.DataSet.FieldByName('MeasDT').AsDateTime,-StrToInt(medtHour.Text)),1);//StrToDateTime('14.05.2014 01:00:00');
+      if Trim(edtHour.Text)='' then
+        edtHour.Text:='24';
+      try
+       lPrevHour:=StrToInt(trim(edtHour.Text));
+      except on E:EConvertError do
+       lPrevHour:=24;
+      end;
+      if lPrevHour<=0 then
+        lPrevHour:=1;
+      // Начало и окончания графика
+      TMSStoredProc(dsGraph.DataSet).ParamByName('FirstDate').AsDateTime:=IncMinute(IncHour(dsTable.DataSet.FieldByName('MeasDT').AsDateTime,-lPrevHour),1);//StrToDateTime('14.05.2014 01:00:00');
       TMSStoredProc(dsGraph.DataSet).ParamByName('LastDate').AsDateTime:=dsTable.DataSet.FieldByName('MeasDT').AsDateTime;
       // Получить данные для графика
       dsGraph.DataSet.Open;

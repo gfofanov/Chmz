@@ -1,6 +1,6 @@
 object frmMain: TfrmMain
-  Left = 230
-  Top = 207
+  Left = 241
+  Top = 188
   Caption = #1042#1080#1079#1091#1072#1083#1080#1079#1072#1094#1080#1103' '#1080#1079#1084#1077#1088#1077#1085#1080#1081'. '#1054#1090#1076#1077#1083#1077#1085#1080#1077' 2'
   ClientHeight = 716
   ClientWidth = 1184
@@ -217,7 +217,7 @@ object frmMain: TfrmMain
         Width = 75
         Height = 24
         Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
-        TabOrder = 3
+        TabOrder = 2
         OnClick = btnApplyTableClick
       end
       object btn6: TToolButton
@@ -234,7 +234,7 @@ object frmMain: TfrmMain
         Width = 193
         Height = 24
         Caption = #1054#1073#1085#1086#1074#1083#1103#1090#1100' '#1088#1072#1079' '#1074' '#1084#1080#1085#1091#1090#1091
-        TabOrder = 2
+        TabOrder = 3
         OnClick = chk1Click
       end
       object btn3: TToolButton
@@ -298,6 +298,7 @@ object frmMain: TfrmMain
       Title.Text.Strings = (
         #1043#1088#1072#1092#1080#1082' '#1080#1079#1084#1077#1088#1077#1085#1080#1081)
       Chart3DPercent = 5
+      Legend.Visible = False
       View3D = False
       Zoom.Pen.Color = clBlack
       Zoom.Pen.Width = 2
@@ -318,7 +319,6 @@ object frmMain: TfrmMain
         Marks.DrawEvery = 26
         Marks.Visible = False
         DataSource = qrGraph
-        SeriesColor = clRed
         ShowInLegend = False
         ClickableLine = False
         LinePen.Width = 3
@@ -336,6 +336,27 @@ object frmMain: TfrmMain
         YValues.Name = 'Y'
         YValues.Order = loNone
         YValues.ValueSource = 'Value'
+      end
+      object hrzbrsrsSeries1: THorizBarSeries
+        Active = False
+        Marks.Arrow.Visible = True
+        Marks.Callout.Brush.Color = clBlack
+        Marks.Callout.Arrow.Visible = True
+        Marks.Visible = False
+        BarWidthPercent = 100
+        Dark3D = False
+        Gradient.Direction = gdLeftRight
+        MultiBar = mbSideAll
+        Shadow.Color = 8487297
+        SideMargins = False
+        XValues.Name = #1041#1088#1091#1089#1086#1082
+        XValues.Order = loNone
+        YValues.Name = 'Y'
+        YValues.Order = loAscending
+        Data = {
+          030400000000000000000000000000000000002E4000000020000000000000F0
+          3F0000000000005940FFFF800000000000000000400000000000005940FF80C0
+          0000000000000000000000000000000840FFFFFF1F}
       end
     end
     object pnlToolGraph: TPanel
@@ -367,15 +388,15 @@ object frmMain: TfrmMain
         TabOrder = 2
         OnClick = btnApplyGraphClick
       end
-      object medtHour: TMaskEdit
+      object edtHour: TEdit
         Left = 143
         Top = 6
-        Width = 32
+        Width = 40
         Height = 24
-        EditMask = '!99;1;_'
         MaxLength = 2
         TabOrder = 1
         Text = '24'
+        OnChange = edtHourChange
       end
     end
   end
@@ -385,7 +406,6 @@ object frmMain: TfrmMain
     SQL.Strings = (
       '{:RETURN_VALUE = CALL getLastListByDate (:LastDate)}')
     Options.TrimVarChar = True
-    Active = True
     Left = 224
     Top = 72
     ParamData = <
@@ -442,7 +462,6 @@ object frmMain: TfrmMain
         '{:RETURN_VALUE = CALL getParamByPeriod (:FacilityCode, :FirstDat' +
         'e, :LastDate)}')
     Options.TrimVarChar = True
-    Active = True
     Left = 352
     Top = 316
     ParamData = <
