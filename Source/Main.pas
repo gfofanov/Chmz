@@ -42,7 +42,6 @@ type
     btnApplyTable: TBitBtn;
     btn6: TToolButton;
     tmrRefresh: TTimer;
-    hrzbrsrsSeries1: THorizBarSeries;
     edtHour: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure actExitExecute(Sender: TObject);

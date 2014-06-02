@@ -55,7 +55,7 @@ object frmMain: TfrmMain
       FooterFont.Style = []
       IndicatorOptions = [gioShowRowIndicatorEh]
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghRowHighlight, dghDblClickOptimizeColWidth, dghColumnResize, dghColumnMove]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghDblClickOptimizeColWidth, dghColumnResize, dghColumnMove]
       RowDetailPanel.Color = clBtnFace
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -323,11 +323,11 @@ object frmMain: TfrmMain
         ClickableLine = False
         LinePen.Width = 3
         LinePen.SmallSpace = 1
-        Pointer.HorizSize = 12
+        Pointer.HorizSize = 6
         Pointer.InflateMargins = True
         Pointer.Pen.Visible = False
         Pointer.Style = psCircle
-        Pointer.VertSize = 7
+        Pointer.VertSize = 6
         Pointer.Visible = True
         XValues.DateTime = True
         XValues.Name = 'X'
@@ -336,27 +336,6 @@ object frmMain: TfrmMain
         YValues.Name = 'Y'
         YValues.Order = loNone
         YValues.ValueSource = 'Value'
-      end
-      object hrzbrsrsSeries1: THorizBarSeries
-        Active = False
-        Marks.Arrow.Visible = True
-        Marks.Callout.Brush.Color = clBlack
-        Marks.Callout.Arrow.Visible = True
-        Marks.Visible = False
-        BarWidthPercent = 100
-        Dark3D = False
-        Gradient.Direction = gdLeftRight
-        MultiBar = mbSideAll
-        Shadow.Color = 8487297
-        SideMargins = False
-        XValues.Name = #1041#1088#1091#1089#1086#1082
-        XValues.Order = loNone
-        YValues.Name = 'Y'
-        YValues.Order = loAscending
-        Data = {
-          030400000000000000000000000000000000002E4000000020000000000000F0
-          3F0000000000005940FFFF800000000000000000400000000000005940FF80C0
-          0000000000000000000000000000000840FFFFFF1F}
       end
     end
     object pnlToolGraph: TPanel
