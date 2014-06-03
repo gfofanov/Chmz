@@ -43,6 +43,10 @@ type
     btn6: TToolButton;
     tmrRefresh: TTimer;
     edtHour: TEdit;
+    lbl2: TLabel;
+    edtWidthGraph: TsSpinEdit;
+    lblHeigth: TLabel;
+    edtHeigthGraph: TsSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
@@ -61,6 +65,8 @@ type
     procedure tmrRefreshTimer(Sender: TObject);
     procedure dbchtGraphBeforeDrawChart(Sender: TObject);
     procedure edtHourChange(Sender: TObject);
+    procedure edtWidthGraphChange(Sender: TObject);
+    procedure edtHeigthGraphChange(Sender: TObject);
   private
     { Private declarations }
     lCurDate: TDateTime; // Дата для выборки данных
@@ -171,6 +177,11 @@ begin
   ReopenGraph;
 end;
 
+procedure TfrmMain.edtHeigthGraphChange(Sender: TObject);
+begin
+  TCustomSeries(dbchtGraph.Series[0]).Pointer.VertSize:=edtHeigthGraph.Value;
+end;
+
 procedure TfrmMain.edtHourChange(Sender: TObject);
 // Проверка ввода кол-ва часов
 begin
@@ -182,6 +193,11 @@ begin
   except on E:EConvertError do
    edtHour.Text:='24';
   end;
+end;
+
+procedure TfrmMain.edtWidthGraphChange(Sender: TObject);
+begin
+  TCustomSeries(dbchtGraph.Series[0]).Pointer.HorizSize:=edtWidthGraph.Value;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);

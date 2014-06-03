@@ -46,6 +46,7 @@ object frmMain: TfrmMain
       ColumnDefValues.ToolTips = True
       DataGrouping.GroupLevels = <>
       DataSource = dsTable
+      EditActions = [geaCopyEh]
       Flat = True
       FooterColor = clWindow
       FooterFont.Charset = DEFAULT_CHARSET
@@ -55,7 +56,7 @@ object frmMain: TfrmMain
       FooterFont.Style = []
       IndicatorOptions = [gioShowRowIndicatorEh]
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghDblClickOptimizeColWidth, dghColumnResize, dghColumnMove]
+      OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghMultiSortMarking, dghIncSearch, dghPreferIncSearch, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
       RowDetailPanel.Color = clBtnFace
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -64,6 +65,7 @@ object frmMain: TfrmMain
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       UseMultiTitle = True
+      VertScrollBar.Tracking = False
       VTitleMargin = 5
       OnGetCellParams = dbgrdhTableGetCellParams
       Columns = <
@@ -348,6 +350,20 @@ object frmMain: TfrmMain
       TabOrder = 1
       OnEnter = pnlToolGraphEnter
       OnExit = pnlToolGraphExit
+      object lbl2: TLabel
+        Left = 296
+        Top = 6
+        Width = 159
+        Height = 16
+        Caption = #1064#1080#1088#1080#1085#1072' '#1101#1083#1077#1084#1077#1085#1090#1072' '#1075#1088#1072#1092#1080#1082#1072
+      end
+      object lblHeigth: TLabel
+        Left = 557
+        Top = 6
+        Width = 155
+        Height = 16
+        Caption = #1042#1099#1089#1086#1090#1072' '#1101#1083#1077#1084#1077#1085#1090#1072' '#1075#1088#1072#1092#1080#1082#1072
+      end
       object rb1: TRadioButton
         Left = 8
         Top = 6
@@ -376,6 +392,52 @@ object frmMain: TfrmMain
         TabOrder = 1
         Text = '24'
         OnChange = edtHourChange
+      end
+      object edtWidthGraph: TsSpinEdit
+        Left = 472
+        Top = 6
+        Width = 73
+        Height = 24
+        MaxLength = 2
+        TabOrder = 3
+        Text = '6'
+        OnChange = edtWidthGraphChange
+        SkinData.SkinSection = 'EDIT'
+        BoundLabel.Indent = 0
+        BoundLabel.Font.Charset = DEFAULT_CHARSET
+        BoundLabel.Font.Color = clWindowText
+        BoundLabel.Font.Height = -11
+        BoundLabel.Font.Name = 'Tahoma'
+        BoundLabel.Font.Style = []
+        BoundLabel.Layout = sclLeft
+        BoundLabel.MaxWidth = 0
+        BoundLabel.UseSkinColor = True
+        MaxValue = 30
+        MinValue = 1
+        Value = 6
+      end
+      object edtHeigthGraph: TsSpinEdit
+        Left = 733
+        Top = 6
+        Width = 76
+        Height = 24
+        MaxLength = 2
+        TabOrder = 4
+        Text = '6'
+        OnChange = edtHeigthGraphChange
+        SkinData.SkinSection = 'EDIT'
+        BoundLabel.Indent = 0
+        BoundLabel.Font.Charset = DEFAULT_CHARSET
+        BoundLabel.Font.Color = clWindowText
+        BoundLabel.Font.Height = -11
+        BoundLabel.Font.Name = 'Tahoma'
+        BoundLabel.Font.Style = []
+        BoundLabel.Layout = sclLeft
+        BoundLabel.MaxWidth = 0
+        BoundLabel.UseSkinColor = True
+        MaxValue = 30
+        MinValue = 1
+        Value = 6
       end
     end
   end
