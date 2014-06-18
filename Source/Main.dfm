@@ -318,18 +318,17 @@ object frmMain: TfrmMain
         Marks.Arrow.Visible = True
         Marks.Callout.Brush.Color = clBlack
         Marks.Callout.Arrow.Visible = True
-        Marks.DrawEvery = 26
-        Marks.Visible = False
+        Marks.DrawEvery = 20
+        Marks.Visible = True
         DataSource = qrGraph
         ShowInLegend = False
         ClickableLine = False
         LinePen.Width = 3
         LinePen.SmallSpace = 1
-        Pointer.HorizSize = 6
+        Pointer.HorizSize = 3
         Pointer.InflateMargins = True
         Pointer.Pen.Visible = False
         Pointer.Style = psCircle
-        Pointer.VertSize = 6
         Pointer.Visible = True
         XValues.DateTime = True
         XValues.Name = 'X'
@@ -351,18 +350,11 @@ object frmMain: TfrmMain
       OnEnter = pnlToolGraphEnter
       OnExit = pnlToolGraphExit
       object lbl2: TLabel
-        Left = 296
-        Top = 6
-        Width = 159
+        Left = 288
+        Top = 8
+        Width = 217
         Height = 16
-        Caption = #1064#1080#1088#1080#1085#1072' '#1101#1083#1077#1084#1077#1085#1090#1072' '#1075#1088#1072#1092#1080#1082#1072
-      end
-      object lblHeigth: TLabel
-        Left = 557
-        Top = 6
-        Width = 155
-        Height = 16
-        Caption = #1042#1099#1089#1086#1090#1072' '#1101#1083#1077#1084#1077#1085#1090#1072' '#1075#1088#1072#1092#1080#1082#1072
+        Caption = #1063#1077#1088#1077#1079' '#1089#1082#1086#1083#1100#1082#1086' '#1090#1086#1095#1077#1082' '#1087#1086#1082#1072#1079#1072#1090#1100' '#1084#1077#1090#1082#1080
       end
       object rb1: TRadioButton
         Left = 8
@@ -393,15 +385,14 @@ object frmMain: TfrmMain
         Text = '24'
         OnChange = edtHourChange
       end
-      object edtWidthGraph: TsSpinEdit
-        Left = 472
+      object edtMarkDrawEvery: TsSpinEdit
+        Left = 524
         Top = 6
-        Width = 73
+        Width = 121
         Height = 24
-        MaxLength = 2
         TabOrder = 3
-        Text = '6'
-        OnChange = edtWidthGraphChange
+        Text = '20'
+        OnChange = edtMarkDrawEveryChange
         SkinData.SkinSection = 'EDIT'
         BoundLabel.Indent = 0
         BoundLabel.Font.Charset = DEFAULT_CHARSET
@@ -412,32 +403,9 @@ object frmMain: TfrmMain
         BoundLabel.Layout = sclLeft
         BoundLabel.MaxWidth = 0
         BoundLabel.UseSkinColor = True
-        MaxValue = 30
-        MinValue = 1
-        Value = 6
-      end
-      object edtHeigthGraph: TsSpinEdit
-        Left = 733
-        Top = 6
-        Width = 76
-        Height = 24
-        MaxLength = 2
-        TabOrder = 4
-        Text = '6'
-        OnChange = edtHeigthGraphChange
-        SkinData.SkinSection = 'EDIT'
-        BoundLabel.Indent = 0
-        BoundLabel.Font.Charset = DEFAULT_CHARSET
-        BoundLabel.Font.Color = clWindowText
-        BoundLabel.Font.Height = -11
-        BoundLabel.Font.Name = 'Tahoma'
-        BoundLabel.Font.Style = []
-        BoundLabel.Layout = sclLeft
-        BoundLabel.MaxWidth = 0
-        BoundLabel.UseSkinColor = True
-        MaxValue = 30
-        MinValue = 1
-        Value = 6
+        MaxValue = 50
+        MinValue = 0
+        Value = 20
       end
     end
   end
@@ -447,6 +415,7 @@ object frmMain: TfrmMain
     SQL.Strings = (
       '{:RETURN_VALUE = CALL getLastListByDate (:LastDate)}')
     Options.TrimVarChar = True
+    Active = True
     Left = 224
     Top = 72
     ParamData = <
@@ -503,6 +472,7 @@ object frmMain: TfrmMain
         '{:RETURN_VALUE = CALL getParamByPeriod (:FacilityCode, :FirstDat' +
         'e, :LastDate)}')
     Options.TrimVarChar = True
+    Active = True
     Left = 352
     Top = 316
     ParamData = <

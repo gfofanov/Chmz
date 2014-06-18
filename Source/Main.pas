@@ -43,10 +43,8 @@ type
     btn6: TToolButton;
     tmrRefresh: TTimer;
     edtHour: TEdit;
+    edtMarkDrawEvery: TsSpinEdit;
     lbl2: TLabel;
-    edtWidthGraph: TsSpinEdit;
-    lblHeigth: TLabel;
-    edtHeigthGraph: TsSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
@@ -65,8 +63,7 @@ type
     procedure tmrRefreshTimer(Sender: TObject);
     procedure dbchtGraphBeforeDrawChart(Sender: TObject);
     procedure edtHourChange(Sender: TObject);
-    procedure edtWidthGraphChange(Sender: TObject);
-    procedure edtHeigthGraphChange(Sender: TObject);
+    procedure edtMarkDrawEveryChange(Sender: TObject);
   private
     { Private declarations }
     lCurDate: TDateTime; // Дата для выборки данных
@@ -102,7 +99,8 @@ end;
 procedure TfrmMain.btnApplyGraphClick(Sender: TObject);
 begin
   ReopenGraph;
-  dbgrdhTable.SetFocus;
+  //dbgrdhTable.SetFocus;
+  dbchtGraph.SetFocus;
 end;
 
 procedure TfrmMain.btnApplyTableClick(Sender: TObject);
@@ -177,11 +175,6 @@ begin
   ReopenGraph;
 end;
 
-procedure TfrmMain.edtHeigthGraphChange(Sender: TObject);
-begin
-  TCustomSeries(dbchtGraph.Series[0]).Pointer.VertSize:=edtHeigthGraph.Value;
-end;
-
 procedure TfrmMain.edtHourChange(Sender: TObject);
 // Проверка ввода кол-ва часов
 begin
@@ -195,9 +188,15 @@ begin
   end;
 end;
 
-procedure TfrmMain.edtWidthGraphChange(Sender: TObject);
+procedure TfrmMain.edtMarkDrawEveryChange(Sender: TObject);
 begin
-  TCustomSeries(dbchtGraph.Series[0]).Pointer.HorizSize:=edtWidthGraph.Value;
+  if edtMarkDrawEvery.Value=0 then
+    TCustomSeries(dbchtGraph.Series[0]).Marks.Visible:=False
+  else
+    begin
+      TCustomSeries(dbchtGraph.Series[0]).Marks.Visible:=True;
+      TCustomSeries(dbchtGraph.Series[0]).Marks.DrawEvery:=edtMarkDrawEvery.Value;
+    end;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -205,6 +204,14 @@ begin
   // Для мониторинга запросов
   myMonitor:=TMSSQLMonitor.Create(Application);
   myMonitor.Active:=True;
+
+  // Ширина и высота элемента графика
+  TCustomSeries(dbchtGraph.Series[0]).Pointer.HorizSize:=3;
+  TCustomSeries(dbchtGraph.Series[0]).Pointer.VertSize:=4;
+
+  // Показывать метки со значениями графика
+  //TCustomSeries(dbchtGraph.Series[0]).Marks.Visible:=True;
+  //TCustomSeries(dbchtGraph.Series[0]).Marks.DrawEvery:=20;
 
   // Прочитать информацию из реестра о сервере и базе данных
   if regChmz.OpenKeyReadOnly(RegistryKey) then
