@@ -319,7 +319,7 @@ object frmMain: TfrmMain
         Marks.Callout.Brush.Color = clBlack
         Marks.Callout.Arrow.Visible = True
         Marks.DrawEvery = 20
-        Marks.Visible = True
+        Marks.Visible = False
         DataSource = qrGraph
         ShowInLegend = False
         ClickableLine = False
@@ -349,13 +349,6 @@ object frmMain: TfrmMain
       TabOrder = 1
       OnEnter = pnlToolGraphEnter
       OnExit = pnlToolGraphExit
-      object lbl2: TLabel
-        Left = 288
-        Top = 8
-        Width = 217
-        Height = 16
-        Caption = #1063#1077#1088#1077#1079' '#1089#1082#1086#1083#1100#1082#1086' '#1090#1086#1095#1077#1082' '#1087#1086#1082#1072#1079#1072#1090#1100' '#1084#1077#1090#1082#1080
-      end
       object rb1: TRadioButton
         Left = 8
         Top = 6
@@ -384,28 +377,6 @@ object frmMain: TfrmMain
         TabOrder = 1
         Text = '24'
         OnChange = edtHourChange
-      end
-      object edtMarkDrawEvery: TsSpinEdit
-        Left = 524
-        Top = 6
-        Width = 121
-        Height = 24
-        TabOrder = 3
-        Text = '20'
-        OnChange = edtMarkDrawEveryChange
-        SkinData.SkinSection = 'EDIT'
-        BoundLabel.Indent = 0
-        BoundLabel.Font.Charset = DEFAULT_CHARSET
-        BoundLabel.Font.Color = clWindowText
-        BoundLabel.Font.Height = -11
-        BoundLabel.Font.Name = 'Tahoma'
-        BoundLabel.Font.Style = []
-        BoundLabel.Layout = sclLeft
-        BoundLabel.MaxWidth = 0
-        BoundLabel.UseSkinColor = True
-        MaxValue = 50
-        MinValue = 0
-        Value = 20
       end
     end
   end

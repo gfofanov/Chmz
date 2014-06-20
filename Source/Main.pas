@@ -43,8 +43,6 @@ type
     btn6: TToolButton;
     tmrRefresh: TTimer;
     edtHour: TEdit;
-    edtMarkDrawEvery: TsSpinEdit;
-    lbl2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure actExitExecute(Sender: TObject);
     procedure dbgrdhTableGetCellParams(Sender: TObject; Column: TColumnEh;
@@ -63,7 +61,6 @@ type
     procedure tmrRefreshTimer(Sender: TObject);
     procedure dbchtGraphBeforeDrawChart(Sender: TObject);
     procedure edtHourChange(Sender: TObject);
-    procedure edtMarkDrawEveryChange(Sender: TObject);
   private
     { Private declarations }
     lCurDate: TDateTime; // Дата для выборки данных
@@ -186,17 +183,6 @@ begin
   except on E:EConvertError do
    edtHour.Text:='24';
   end;
-end;
-
-procedure TfrmMain.edtMarkDrawEveryChange(Sender: TObject);
-begin
-  if edtMarkDrawEvery.Value=0 then
-    TCustomSeries(dbchtGraph.Series[0]).Marks.Visible:=False
-  else
-    begin
-      TCustomSeries(dbchtGraph.Series[0]).Marks.Visible:=True;
-      TCustomSeries(dbchtGraph.Series[0]).Marks.DrawEvery:=edtMarkDrawEvery.Value;
-    end;
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
